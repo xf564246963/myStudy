@@ -1,0 +1,565 @@
+/**
+ * Created by wz on 2014/12/18.
+ */
+body p article {
+    padding: 0;
+    margin: 0;
+
+}
+
+html{
+	height:100%;
+	position:relative;
+	background-color: #fff;
+}
+
+body {
+	margin: 0;
+    background-color: #fff;
+    width:100%;
+    height:95.5%;
+    overflow-y:hidden;
+    font-family: Apple LiGothic Medium ,Microsoft YaHei, SimSun, Arial, Helvetica, sans-serif;
+}
+
+.flowFather {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+}
+
+.flowSon {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -ms-box-flex: 1;
+}
+
+.inputInfo {    
+     padding:0 2rem;
+     height:8.75rem;
+     background-color: #fff;
+	 border-bottom:1px solid #dddddd;
+}
+
+.inputInfo input {
+    width: 100%;     
+    font-size: 2.5rem; 
+    line-height:3.5rem;
+    margin-left:-1%;
+    border: none;
+    outline:none;
+    color:#1b1b1c;
+    display: inline-block;
+    font-weight: 400;
+	font-family: Apple LiGothic Medium ,Microsoft YaHei, SimSun, Arial, Helvetica, sans-serif;
+
+}
+
+.inputWraper{
+	line-height:8.1rem;
+    height:5.25rem;  
+    padding: 0 0 0 3px;
+}
+
+#phone::-webkit-input-placeholder {
+   font-size:1.75rem;
+   line-height:3.6rem;
+} 
+
+/*check*/
+div.option label {
+    width: 100%;
+    display: block;
+	margin:0 0 2rem 4% ;
+	background-color: #fff;
+	border-radius:0.35rem;
+}
+
+div.option label:last-child {
+	margin:0 4% 2rem 4%;
+}
+
+div.option label>span {
+	border:2px solid  #a8a8a8;
+	border-radius:0.625rem;
+    height: 8.125rem;
+    margin: 0 auto;
+    display: block;
+}
+
+div.option label>span>div:first-child{
+    text-align:center;
+	font-size:2rem;
+	padding-top:1.4rem;
+	font-weight:400;
+	color:#a8a8a8;
+}
+
+div.option label>span>div:nth-child(2){
+    text-align:center;
+	font-size:1.4rem;
+	font-weight:400;
+	color:#a8a8a8;
+}
+div.option label>span>div:nth-child(2)>span{
+    font-size:1.4rem;
+}
+
+div.option label>span>div:nth-child(3){
+    text-align:center;
+	font-size:1.4rem;
+	font-weight:400;
+	color:#a8a8a8;
+}
+div.option label>span>div:nth-child(3)>span{
+    font-size:1.4rem;
+}
+
+.pull-right{
+	text-align:right;
+}
+
+.centerMargin{
+	margin:0 3%;
+}
+div.option label input {
+    display: none;
+}
+
+div.option label input:checked + span {
+    color: #ea5a17;
+    font-weight: 400;
+    border:2px solid  #ea5a17;
+}
+
+div.option label input:checked + span>span {
+    color: #ea5a17; 
+}
+
+div.option label input:checked ~span>div{
+	color: #ea5a17; 
+}
+
+label p{
+    display: inline-block;
+}
+
+.button {
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    bottom:0;
+    position:absolute;
+}
+
+#button1{
+	
+}
+
+#button2{
+	
+}
+
+.button div[enabl="YES"] {
+    box-flex: 1;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -ms-box-flex: 1;
+    height: 5.5rem;
+    line-height: 5.5rem;
+    text-align: center;
+    color: #fff;
+    background: #ea5a17;
+    margin:0 14%;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	font-size:2rem;
+}
+.button div[enabl="NO"] {
+    box-flex: 1;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -ms-box-flex: 1;
+     height: 5.5rem;
+    line-height: 5.5rem;
+    text-align: center;
+    color: #fff;
+    background: #a8a8a8;
+     margin: 0 14%;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	font-size:2rem;
+}
+.button div[enabl="YESNO"] {
+     height: 5.5rem;
+    line-height: 5.5rem;
+    text-align: center;
+    color: #fff;
+    background: #a8a8a8;
+      margin: 3%;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	font-size:2rem;
+}
+
+
+.pay_other {
+    margin: 0 10px;
+}
+
+.pay_other span {
+    height: 40px;
+    line-height: 40px;
+    background: #4a5a89;
+    border-radius: 3px;
+    color: #fff;
+    width: 50%;
+    display: block;
+    cursor: pointer;
+    text-align: center;
+}
+
+.yellow {
+    
+}
+
+.signCheck{
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: 65%;
+    background-size: 65%;
+}
+
+label.buttonAgree  span[enabl="YES"]{
+    background-image:url("../images/cbselect.png");
+}
+label.buttonAgree  span[enabl="NO"]{
+    background-image: url("../images/cbnormal.png");
+}
+.course-sidebar-result {
+            width: 100%;
+            margin: 0;
+            padding-left: 0;
+            list-style-type: none;
+            background-color: #fff;
+            font-size: 1.75rem;
+            position: absolute;
+            bottom:0; 
+            height:54rem; 
+            display:none;
+            overflow-y:scroll;   
+            overflow-x:hidden;       
+        }
+
+ .course-sidebar-result > li {
+     line-height: 6.25rem;
+     width: 100%;
+     margin-left: 2rem;
+     border-bottom:1px solid #dddddd;
+ }
+
+ .course-sidebar-result > li:hover {
+     color:#ea5a17;
+ }
+
+ .course-sidebar-result p {
+     display: inline-block;
+     color: #5e5e5e;
+     text-decoration: none;
+ }
+
+ .course-sidebar-result li:hover p{
+      color:#ea5a17;
+ }
+ 
+ .course-sidebar-result li:hover p:nth-child(2){
+      background:url(../images/SJCZ_tankuang_xuanzhong@2x.png) no-repeat 92% center;
+      background-image: -webkit-image-set(url(../images/SJCZ_tankuang_xuanzhong@2x.png) 1x, url(../images/SJCZ_tankuang_xuanzhong@2x.png) 2x);
+      background-size:10%;
+      width:50%;
+      height:6.25rem;
+ }
+ 
+ .divBtm{
+     margin-bottom:40%;
+     border-top:1px solid #dddddd;
+ }
+ 
+ .couponTitle{
+     text-align:center;
+      line-height: 6.25rem;
+      font-size:2.25rem;
+      color:#1c1b1b;
+       width: 100%;
+      margin: 0;
+      border-bottom:1px solid #dddddd;
+      position:relative;
+   }
+  .couponTitle>img{
+    position:absolute;
+    left:2rem;
+    top:2rem;
+  }
+ 
+ li.black{
+    color:#1c1b1b;
+ }
+
+ li.grey{
+    color:#a8a8a8;
+ }
+
+ li>p:last-child {
+     text-align: right;
+     position: absolute;
+     right: 10px
+ }
+.cardInfo {
+    width: 100%;
+    background: #fff;
+    height: 6.25rem;
+    line-height: 6.25rem;
+    border-top: 1px solid #dddddd;
+    font-size: 1.75rem;
+    color: #a8a8a8;
+	margin-left:2rem;
+    display: -webkit-box
+}
+.textInfo {
+    -webkit-box-flex: 1;
+	text-align:right;
+	color:#1c1b1b;
+}
+.cardRadios span {
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+    vertical-align: middle;
+    text-indent: 25px;
+    line-height: 20px;
+    margin: 0 5px;
+}
+.showChoose{
+    width: 12.9%;
+    background-repeat: no-repeat;
+    background-image: url("../images/SJCZ_youhuiquan_next@3x.png");
+    background-position: 10% 48%;
+    -webkit-background-size: 30%;
+    background-size: 30%;
+}
+.msg {
+padding: 15px;
+line-height: 20px;
+color: #828282;
+}
+.msg p {
+padding: 0;
+margin: 0;
+margin-top: 5px;
+}
+
+*{
+margin:0;
+padding:0;
+}
+
+.parent{
+   overflow:hidden;
+   width:100%;
+   display:-webkit-box;
+   position:relative;
+   height:6.25rem;
+   background:#ffffff;
+   border-bottom:1px solid #dddddd;
+   border-top:1px solid #dddddd;
+}
+#box1,#box2{
+   box-flex: 1;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -ms-box-flex: 1;
+    font-size: 2rem;
+    position: relative;
+    line-height: 6.25rem;
+    height: 6.25rem;
+    text-align: center;
+	color:#646464;
+}
+
+.line{
+    display: inline-block;
+    background: #ea5a17;
+    height: 4px;
+    width: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.item{
+	width:100%;
+	overflow-x:hidden;
+	overflow-y:auto;
+	height:93%;
+	padding-top:2rem;
+	position:absolute;
+	top:0;
+}
+#items{
+    overflow-x:hidden;
+	overflow-y:auto;
+    position:relative;
+    width:100%;
+    height:84%; 
+	background:#ffffff;
+	border-bottom:1px solid #dddddd;
+}
+.divBorder{
+	border:0.625rem solid #F4F3F2;
+}
+.phoneBox {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    padding:0 15px;
+    height:4。5rem;
+     background-color: #fff;
+    border-top: 1px solid #bdbdbd;
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.phoneInput {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -ms-box-flex: 1;
+    height:8.75rem;
+}
+
+.phoneInput input {
+	width: 100%;     
+    font-size:1.75rem;
+    line-height:8.75rem;
+    height:5.75rem;   
+    border: none;
+    outline:none;
+    display: block;
+    padding: 0 0 0 3px;
+    font-weight: 400;
+	font-family: Apple LiGothic Medium ,Microsoft YaHei, SimSun, Arial, Helvetica, sans-serif;
+}
+
+ .phoneTip {
+    width: 50%;
+    font-size: 1.25rem;   
+    line-height: 3rem;
+    white-space: nowrap;
+}
+.closeIcon{
+    width: 3.75rem;
+    height: 8.75rem;
+    line-height:8.75rem;
+    background-repeat: no-repeat;
+    background-position: center 48%;
+    background-image: url("../images/SJCZ_tankuang_guanbi@3x.png");
+    -webkit-background-size: 60%;
+    background-size: 60%;
+}
+.poneIcon{
+     width: 3.75rem;
+    height: 8.75rem;
+    line-height:2.5rem;
+    background-repeat: no-repeat;
+    background-image: url("../images/SJCZ_icon_shoujitongxunlu@3x.png");
+    background-position: center 48%;
+    -webkit-background-size: 70%;
+    background-size: 70%;
+} 
+
+ .buttonTip {
+    height: 3rem;
+}
+.buttonTip>span:first-child{
+    width: 1.5rem;
+    height: 1.8rem;
+    vertical-align: middle;
+    display: inline-block;
+}
+.buttonTip > span:nth-child(2) {
+    display: inline-block;
+    font-size:0.8rem;
+    margin-left: -0.6rem;
+}
+
+.buttonTip > span:nth-child(3) {
+   font-size: 0.8rem;
+   margin-left:40%;
+}
+
+.halfBorder{
+	height:1px;
+	width:100%;
+	background:#ccc;
+	-webkit-transform:scaleY(0.5);
+	transform:scaleY(0.5);
+}
+
+.payList{
+	height:6.25rem;
+	line-height:6.25rem;
+	border-top:1px solid #dddddd;
+	font-size:1.75rem;
+	color:#a8a8a8;
+}
+
+.payList:first-child{
+	padding-left:2rem;
+	
+}
+
+.payList:nth-child(2){
+	margin-left:2rem;
+}
+
+.payList:nth-child(3){
+	margin-left:2rem;
+	font-size:2.5rem;
+	color:#1c1b1b;
+	font-weight:500;
+}
+
+.payListTail{
+	height:6.25rem;
+	line-height:6.25rem;
+	border-top:1px solid #dddddd;
+	margin-left:2rem;
+	font-size:2.5rem;
+	color:#1c1b1b;
+	font-weight:500;
+}
+
+.payCount{
+	height:6.875rem;
+	border-top:1px solid #dddddd;
+	font-size:1.375rem;
+	color:#a8a8a8;
+	margin-left:2rem;
+}
+
+.payCount>div:nth-child(1){
+	padding-top:1.4rem;
+}
+
+.tail{
+	width:10.5%;
+}
+
+#count{
+	display:none;
+}

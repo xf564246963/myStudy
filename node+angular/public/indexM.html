@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    	content="minimum-scale=0.33,maximum-scale=0.33,user-scalable=no, initial-scale=0.33,width=device-width">
+    	<title>手机充值</title>
+    <link type="text/css" href="css/wzCss.css" rel="stylesheet" />
+   <script type="text/javascript" src="js/jquery.min.js"></script>  
+    <script type="text/javascript" src="js/common.js"></script>   
+    <script>   
+		
+                 viewInt();				
+	        	 tabsInit();
+		
+    </script>
+</head>
+<body style="margin: 0;overflow:hidden;">
+<div class="inputInfo flowFather" >
+			<div class="flowSon" >
+			    <div class="inputWraper">
+					<input   type="tel" id="phone" inputType="integer" intLength="11"
+							splitLenth="4" firstSplitLenth="3" placeholder="请输入手机号" />
+				</div>
+				<div class="buttonTip">
+			        <div class="phoneTip" id="phoneTip">账户绑定号码(<span id="place">湖北</span>
+			        <span id="phoneTips">移动</span>)</div>
+			    </div>
+			</div>    
+			
+			<div id="phoneChoose"  class="poneIcon"></div>
+			<div class="closeIcon" id="phoneClose" style="display: none"></div>	    
+</div>
+<div class="divBorder"></div>
+<div class="parent">
+	<div id="box1" >
+	<div>充话费</div>
+	</div>
+	<div class="sep"></div>
+	<div id="box2" >
+	<div>充流量</div>
+	</div>
+	<div class="line"></div>
+</div>
+<div id="items">
+	<div class="item">
+		<ul id="result"  class="course-sidebar-result"></ul>
+		<div class="appearanceChoose" >
+		    <div class="option">
+		    	<div class="flowFather" name="amountRadio">
+		            <label class="flowSon"><input type="radio" name="amount" value="20" ><span><div>20元</div><div><span>售价19.7元</span></div></span></label>
+		            <label class="flowSon"><input type="radio" name="amount" value="30"><span><div>30元</div><div><span>售价19.7元</span></div></span></label>
+		            <label class="flowSon"><input type="radio" name="amount" value="50" ><span><div>50元</div><div><span>售价19.7元</span></div></span></label>
+		        </div>
+		        <div class="flowFather" name="amountRadio" style="border-bottom:1px solid #dddddd;">
+		            <label class="flowSon"><input type="radio" name="amount" value="100" checked><span><div>100元</div><div><span>售价19.7元</span></div></span></label>
+		            <label class="flowSon"><input type="radio" name="amount" value="300"><span><div>300元</div><div><span>售价19.7元</span></div></span></label>
+		            <label class="flowSon"><input type="radio" name="amount" value="500"><span><div>500元</div><div><span>售价19.7元</span></div></span></label>
+		        </div>
+		        <div class="divBorder"></div>
+			    <div>
+					<div class="flowFather payList"><div class="flowSon">充值面额</div><div class="flowSon pull-right"><span id='sample'>100</span><span>元</span></div><div class="tail"></div></div>
+					 <div id="cardList" style="margin:10px 0;">
+				        <div id="cardInfo" class="cardInfo">
+				        	<div class="flowSon">优惠券</div>
+				            <div class="textInfo" id="cardText">
+				                	本次不使用优惠券
+				            </div>
+				            <div class="showChoose"></div>
+				        </div>
+				       
+				    </div>
+				    <div class="flowFather payCount" id='count'>
+					    <div class="flowFather"><div class="flowSon">订单金额</div><div class="flowSon pull-right"><span id='sampleCopy'>100</span><span>元</span></div><div class="tail"></div></div>
+					    <div class="flowFather"><div class="flowSon">优惠金额</div><div class="flowSon pull-right"><span id='minusAmount'>100</span><span>元</span></div><div class="tail"></div></div>
+					 </div> 
+					<div class="flowFather payListTail"><div class="flowSon">需付款</div><div class="flowSon pull-right faattf"><span id="amountTips" >98.5</span><span>元</span></div><div class="tail"></div></div>
+		        </div>
+			</div>	
+		</div>
+		<div class="button" id="button1">
+			<!--<div  name="next" id="next1" enabl="NO">快捷支付</div>--> 
+			<div  name="next" id="next2" enabl="NO" >去支付</div>
+		</div>
+	</div>
+	<!-- <div class="item">
+		<div class="appearanceChoose" >
+		    <div class="option">
+		        <div class="flowFather" name="flowRadio">
+		            <label class="flowSon"><input type="radio" name="flow" value="1" ><span><div>5M/1元</div><span></span><div><span>售价19.7元</span></div></span></label>
+		            <label class="flowSon"><input type="radio" name="flow" value="2"><span><div>10M/2元</div><span></span><div><span>售价19.7元</span></div></span></label>
+		            <label class="flowSon"><input type="radio" name="flow" value="6" ><span><div>50M/6元</div><span></span><div><span>售价19.7元</span></div></span></label>
+		        </div>
+		        <div class="flowFather" name="flowRadio" style="border-bottom:1px solid #dddddd;">
+		            <label class="flowSon"><input type="radio" name="flow" value="10" checked><span><div>100M/10元</div><span></span><div><span>售价19.7元</span></div></span></label>
+		            <label class="flowSon"><input type="radio" name="flow" value="30"><span><div>500M/30元</div><span></span><div><span>售价19.7元</span></div></span></label>
+		            <label class="flowSon"><input type="radio" name="flow" value="50"><span><div>1G/50元</div><span></span><div><span>售价19.7元</span></div></span></label>
+		        </div>
+		        <div class="divBorder"></div>
+		        <div>
+					<div class="flowFather payList"><div class="flowSon">充值面额</div><div class="flowSon pull-right"><span id="flowSample">10</span><span>元</span></div><div class="tail"></div></div>
+					<div></div>
+					<div class="flowFather payList"><div class="flowSon">需付款</div><div class="flowSon pull-right faattf"><span  id="flowPay">10</span><span>元</span></div><div class="tail"></div></div>
+				</div>
+		    </div>
+		</div>
+		<div class="button" id="button2">
+			<div  name="next" id="next3" enabl="NO">去支付</div>
+			<div  name="next" id="next4" enabl="NO">刷卡支付</div>
+		</div>
+	</div> -->
+</div>
+<ul id="cardChooseList"  class="course-sidebar-result">           
+</ul>
+
+</body>
+</html>

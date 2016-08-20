@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example1"></div>
+    <div id="example2"></div>
+    <div id="example3"></div>
+    <div id="example4"></div>
+    <div id="example5"></div>
+    <script type="text/babel">
+      //ex1
+      /*ReactDOM.render(
+        <h1>Hello,&nbsp;&middot; world!</h1>,
+        document.getElementById('example1')
+      );*/
+
+      //ex2
+      var LikeButton = React.createClass({
+        getInitialState: function() {
+          return {liked: false};
+        },
+        handleClick: function(event) {
+          this.setState({liked: !this.state.liked});
+        },
+        render: function() {
+          var text = this.state.liked ? 'like' : 'haven\'t liked';
+          return (
+                  <p onClick={this.handleClick}>
+          You {text} this. Click to toggle.
+          </p>
+          );
+        }
+      });
+
+      ReactDOM.render(
+      <LikeButton />,
+              document.getElementById('example2')
+      );
+
+      //ex3
+      var Avatar = React.createClass({
+        render: function() {
+          return (
+                  <div>
+                  <ProfilePic username={this.props.username} />
+                  <ProfileLink username={this.props.username} />
+                  </div>
+          );
+        }
+      });
+
+      var ProfilePic = React.createClass({
+        render: function() {
+          return (
+             <img src={'http://graph.facebook.com/' + this.props.username + '/picture'} />
+          );
+        }
+      });
+
+      var ProfileLink = React.createClass({
+        render: function() {
+          return (
+           <a href={'http://www.facebook.com/' + this.props.username}>
+                  {this.props.username}
+          </a>
+          );
+        }
+      });
+
+      ReactDOM.render(
+      <Avatar username="pwh" />,
+              document.getElementById('example3')
+      );
+
+      //ex4
+      /*var ListItemWrapper = React.createClass({
+        render: function() {
+          return <li key={this.props.data.id}>{this.props.data.text}</li>;
+        }
+      });
+      var MyComponent = React.createClass({
+        render: function() {
+          return (
+                  <ul>
+                  {this.props.results.map(function(result) {
+                    return <ListItemWrapper data={result}/>;
+                  })}
+          </ul>
+          );
+        }
+      });*/ //wrong way!!! 会报错
+      var ListItemWrapper = React.createClass({
+        render: function() {
+          return <li>{this.props.data.text}</li>;
+        }
+      });
+
+      var MyComponent = React.createClass({
+        render: function() {
+          //务必把 key 添加到子级组件本身上，而不是每个子级内部最外层HTML上
+          return (
+                  <ul>
+                  {this.props.results.map(function(result) {
+                    return <ListItemWrapper key={result.id} data={result}/>;
+                  })}
+          </ul>
+          );
+        }
+      });  //right way!!!
+      var obj=[{id:1,text:"text1"},{id:2,text:"text2"},{id:3,text:"text3"}];
+      ReactDOM.render(
+      <MyComponent results={obj} />,
+              document.getElementById('example4')
+      );
+
+      //ex5
+      var Ex5 = React.createClass({
+        render: function() {
+          var items = {};
+          this.props.results.forEach(function(result) {
+            // 如果 result.id 看起来是一个数字（比如短哈希），那么
+            // 对象字面量的顺序就得不到保证。这种情况下，需要添加前缀
+            // 来确保 key 是字符串。
+            items['result' + result.id] = <li>{result.text}</li>;
+          });
+          //return html的内容{}中不支持object对象，会报错
+          return (
+                  <ol>
+                    {items['resulta']}
+                    {items['resultb']}
+                    {items['resultc']}
+                  </ol>
+          );
+        }
+      });  //right way!!!
+      var obj=[{id:'a',text:"text1"},{id:'b',text:"text2"},{id:'c',text:"text3"}];
+      ReactDOM.render(
+      <Ex5 results={obj} />,
+              document.getElementById('example5')
+      );
+
+    </script>
+  </body>
+</html>

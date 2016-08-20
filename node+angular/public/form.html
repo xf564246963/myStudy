@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <title>Node app</title>
+    <script src="js/angularjs.js"></script>
+    <script src="js/angular-ui-router.js"></script>
+    <script src="js/angular-ui-router.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/service.js"></script>
+</head>
+<body>
+<div ng-controller="HomeController" >
+    <!--<label for="user">用户名</label><input type="text" ng-model="username" id="user">-->
+    <!--<label for="pass">密码</label><input type="password" ng-model="password" id="pass">-->
+    <form method="post" enctype="multipart/form-data" ng-submit="formSubmit()" id="myForm">
+        <input type="file"  ng-change="upFile()" name="photos" ng-model="url">
+        <button type="submit">提交</button>
+    </form>
+    <img ng-src="{{imgSrc}}" ng-if="imgSrc">
+    <!--formidable code-->
+   <!-- <input type="file"  ng-change="upFile()" name="photos" ng-model="url" >
+    <button type="button" ng-click="formSubmit()" >提交</button>-->
+
+    <!--图片上传显示 code-->
+    <!--<input type="file" file-model="myFile" name="photos"/>
+    <button type="submit" ng-click="formSubmit()">提交</button>
+    <div>
+        <img ng-src="{{imageSrc}}" />
+    </div>-->
+</div>
+<div ng-controller="parent" ng-click="parent()">parent
+    <div ng-controller="child" ng-click="child()">child</div>
+    <div >xxxx</div>
+    <ui-view ui-sref="index"></ui-view>
+</div>
+
+</body>
+</html>
