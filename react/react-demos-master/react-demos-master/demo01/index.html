@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <script src="../build/react.js"></script>
     <script src="../build/react-dom.js"></script>
-    <script src="../build/browser.min.js"></script>
-  </head>
-  <body>
-    <div id="example1"></div>
-    <div id="example2"></div>
-    <div id="example3"></div>
-    <div id="example4"></div>
-    <div id="example5"></div>
-    <script type="text/jsx">
+    <script src="../build/JSXTransformer.js"></script>
+    <style type="text/css">
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="example1"></div>
+<div id="example2"></div>
+<div id="example3"></div>
+<div id="example4"></div>
+<div id="example5"></div>
+<div id="example6"></div>
+<div id="example7"></div>
+<div id="example8"></div>
+<div id="example9"></div>
+<div id="example10"></div>
+<script type="text/jsx;harmony=true">
       //ex1
       /*ReactDOM.render(
-        <h1>Hello,&nbsp;&middot; world!</h1>,
-        document.getElementById('example1')
-      );*/
+       <h1>Hello,&nbsp;&middot; world!</h1>,
+       document.getElementById('example1')
+       );*/
 
       //ex2
       var LikeButton = React.createClass({
@@ -30,10 +40,10 @@
           var text = this.state.liked ? 'like' : 'haven\'t liked';
           return (
                   <p onClick={this.handleClick}>
-          You {text} this. Click to toggle.
-          </p>
-          );
-        }
+        You {text} this. Click to toggle.
+      </p>
+      );
+      }
       });
 
       ReactDOM.render(
@@ -42,61 +52,61 @@
       );
 
       //ex3
-      var Avatar = React.createClass({
-        render: function() {
-          return (
-                  <div>
-                  <ProfilePic username={this.props.username} />
-                  <ProfileLink username={this.props.username} />
-                  </div>
-          );
-        }
-      });
+      /* var Avatar = React.createClass({
+       render: function() {
+       return (
+       <div>
+       <ProfilePic username={this.props.username} />
+       <ProfileLink username={this.props.username} />
+       </div>
+       );
+       }
+       });
 
-      var ProfilePic = React.createClass({
-        render: function() {
-          return (
-             <img src={'http://graph.facebook.com/' + this.props.username + '/picture'} />
-          );
-        }
-      });
+       var ProfilePic = React.createClass({
+       render: function() {
+       return (
+       <img src={'http://graph.facebook.com/' + this.props.username + '/picture'} />
+       );
+       }
+       });
 
-      var ProfileLink = React.createClass({
-        render: function() {
-          return (
-           <a href={'http://www.facebook.com/' + this.props.username}>
-                  {this.props.username}
-          </a>
-          );
-        }
-      });
+       var ProfileLink = React.createClass({
+       render: function() {
+       return (
+       <a href={'http://www.facebook.com/' + this.props.username}>
+       {this.props.username}
+       </a>
+       );
+       }
+       });
 
-      ReactDOM.render(
-      <Avatar username="pwh" />,
-              document.getElementById('example3')
-      );
+       ReactDOM.render(
+       <Avatar username="pwh" />,
+       document.getElementById('example3')
+       );*/
 
       //ex4
       /*var ListItemWrapper = React.createClass({
-        render: function() {
-          return <li key={this.props.data.id}>{this.props.data.text}</li>;
-        }
-      });
-      var MyComponent = React.createClass({
-        render: function() {
-          return (
-                  <ul>
-                  {this.props.results.map(function(result) {
-                    return <ListItemWrapper data={result}/>;
-                  })}
-          </ul>
-          );
-        }
-      });*/ //wrong way!!! 会报错
+       render: function() {
+       return <li key={this.props.data.id}>{this.props.data.text}</li>;
+       }
+       });
+       var MyComponent = React.createClass({
+       render: function() {
+       return (
+       <ul>
+       {this.props.results.map(function(result) {
+       return <ListItemWrapper data={result}/>;
+       })}
+       </ul>
+       );
+       }
+       });*/ //wrong way!!! 会报错
       var ListItemWrapper = React.createClass({
         render: function() {
           return <li>{this.props.data.text}</li>;
-        }
+      }
       });
 
       var MyComponent = React.createClass({
@@ -106,10 +116,10 @@
                   <ul>
                   {this.props.results.map(function(result) {
                     return <ListItemWrapper key={result.id} data={result}/>;
-                  })}
-          </ul>
-          );
-        }
+                    })}
+                  </ul>
+                  );
+      }
       });  //right way!!!
       var obj=[{id:1,text:"text1"},{id:2,text:"text2"},{id:3,text:"text3"}];
       ReactDOM.render(
@@ -122,20 +132,20 @@
         render: function() {
           var items = {};
           this.props.results.forEach(function(result) {
-            // 如果 result.id 看起来是一个数字（比如短哈希），那么
-            // 对象字面量的顺序就得不到保证。这种情况下，需要添加前缀
-            // 来确保 key 是字符串。
-            items['result' + result.id] = <li>{result.text}</li>;
-          });
-          //return html的内容{}中不支持object对象，会报错
-          return (
-                  <ol>
-                    {items['resulta']}
-                    {items['resultb']}
-                    {items['resultc']}
-                  </ol>
-          );
-        }
+                    // 如果 result.id 看起来是一个数字（比如短哈希），那么
+                    // 对象字面量的顺序就得不到保证。这种情况下，需要添加前缀
+                    // 来确保 key 是字符串。
+                    items['result' + result.id] = <li>{result.text}</li>;
+        });
+      //return html的内容{}中不支持object对象，会报错
+      return (
+              <ol>
+              {items['resulta']}
+              {items['resultb']}
+              {items['resultc']}
+              </ol>
+              );
+      }
       });  //right way!!!
       var obj=[{id:'a',text:"text1"},{id:'b',text:"text2"},{id:'c',text:"text3"}];
       ReactDOM.render(
@@ -143,8 +153,205 @@
               document.getElementById('example5')
       );
 
+      //ex6
+      //首字母一定要大写FancyCheckbox
+      var Ex6 = React.createClass({
+        render: function() {
+          var fancyClass = this.props.checked ? 'FancyChecked' : 'FancyUnchecked';
+
+          return (
+                  <div  onClick={this.props.onClick}>
+        {this.props.children} {fancyClass}
+      </div>
+      );
+      }
+      });
+      //this.props.children拿到的render时自定义标签中的内容
+      //render时，如果某个this.props中的属性没有赋值也是可以的，如没有赋值onClick也不会报错
+      ReactDOM.render(
+              <Ex6 checked={true} onClick={console.log.bind(console)}>
+              hello
+              </Ex6>,
+              document.getElementById('example6')
+      );
+
+      //ex7
+      'use strict';
+      var Ex7 = React.createClass({
+        render: function() {
+          var { checked, ...other } = this.props;
+          var fancyClass = checked ? 'FancyChecked' : 'FancyUnchecked';
+          // `other` 包含 { onClick: console.log } 但 checked 属性除外
+          return (
+            <div {...other} className={fancyClass} />
+          );
+        }
+      });
+      ReactDOM.render(
+        <Ex7 checked={true} onClick={console.log.bind(console)}>
+          Hello world!
+        </Ex7>,
+         document.getElementById('example7')
+      );
+      //console.log.bind(console)
+      /*可以用来重新定义console.log，如var log = console.log.bind(console); log(123);就等同console.log(123);
+        但在这里就是起到console.log(reactDOM，event)的作用，输出这个事件对象和reactDOM对象(只释义但没有这种写法);
+        将这个方法绑在onclick上和onClick上不同,onClick会输出事件对象和reactDOM对象，但onclick上什么都没有,
+        因为onclick需要传入对象 即onclick='console.log.bind(console)(event)'（输出js原生事件对象）,
+        而在jquery事件方法里面则不用传参也可以输出事件对象$('ele').click(console.log.bind(console));(输出jquery事件对象，与js事件对象包含属性不同)
+      */
+
+       /*ES6解构赋值
+       1.以对象key为名声明变量
+       var o = {p: 42, q: true};
+       var {p,q} = o;
+       console.log(p); // 42
+       console.log(q); // true
+       2.将方法传参存入到对象中
+       function fun(a,b,c){
+            var obj = {a,b,c};
+       }
+       等同于
+       function fun(a,b,c){
+           var obj = {
+               a:a,
+               b:b,
+               c:c
+           }
+       }
+       */
+
+       //ex8
+       var Ex8 = React.createClass({
+           getInitialState: function() {
+              return {isChecked: false};
+           },
+           handleChange:function(event){
+               console.log(event.target)
+               this.setState({isChecked:!this.state.isChecked})
+           },
+          render: function() {
+            var { title, ...other } = this.props;
+            var isChecked=this.state.isChecked;
+            //...other表示除了前面属性外的this.props中的属性
+            var fancyClass = isChecked ? 'red' : '';
+            var fancyTitle = isChecked ? 'X ' + title : 'O ' + title;
+            //设置class用className避免冲突
+            //注意{...other}的顺序，在后面会覆盖掉前面的相同属性，导致input变成一个radio
+            //注意事件绑定的写法与ex7的不同，ex7是直接写在ReactDOM.render()调用时，表示定义this.props中onClick属性，然后由{...other}传入到元素属性中
+            //而ex8中是在createClass时定义的元素绑定的方法，然后进行绑定
+
+            //交互组件input、option的value、checked、selected属性一旦设置会变成受限制组件（会影响用户改变该值），需要使用onchange事件才能响应用户的内容来改变
+            //如果这些属性没有设置组件就是不受限制组件，跟原生dom的使用是一样的
+            //也可以使用defaultValue 属性（类型为 radio、checkbox 的<input> 支持 defaultChecked 属性， <select> 支持 defaultValue 属性）来设置默认值，不会阻止用户改变该值
+            return (
+            <div>
+              <label  className={fancyClass}>
+                {fancyTitle}
+              </label>
+              <input
+                  {...other}
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={this.handleChange}
+                />
+            </div>
+            );
+          }
+        });
+
+       ReactDOM.render(
+        <Ex8 type={'radio'} title={'bear'}  />,
+         document.getElementById('example8')
+      );
+
+      //ex9
+      var Ex9 = React.createClass({
+          handleChange:function(event){
+            //event一定要传，不然获取的reactDOM对象
+            console.log(event.target);
+          },
+          render: function() {
+            return (
+            <div>
+              <label>
+                radio
+              </label>
+              <input
+                  type="radio"
+                  defaultChecked='true'
+                  name='test'
+                  defaultValue='0'
+                  onChange={this.handleChange}
+               />
+               <input
+                  type="radio"
+                  name='test'
+                   defaultValue='1'
+                  onChange={this.handleChange}
+               />
+            </div>
+            );
+          }
+        });
+
+       ReactDOM.render(
+        <Ex9 />,
+         document.getElementById('example9')
+      );
+
+      //ex10
+       var RadioButton = React.createClass({
+            render: function(){
+                return (
+                    <label htmlFor={this.props.id}>
+                        <input type="radio"
+                               id={this.props.id}
+                               name={this.props.name}
+                               value={this.props.value}
+                               checked={this.props.checked}
+                               onChange = {this.handleChange}/>
+                        {this.props.text}
+                    </label>
+                );
+            },
+            handleChange: function(event){
+                console.log(event.target);
+                this.setState({selectedValue: event.target.value});
+                if(this.props.onSelectedValueChanged){
+                    this.props.onSelectedValueChanged(event);
+                }
+            }
+        });
+
+        var RadioButtonList = React.createClass({
+                render: function(){
+                    return (
+                        <span className="radioButtonList">{this.renderRadionButtons()}</span>
+                    );
+                },
+                renderRadionButtons: function(){
+                    return this.props.listItems.map(function(item, index){
+                        return (<RadioButton id={this.props.name + "_" + index}
+                                     name={this.props.name}
+                                     value={item.value||item}
+                                     text = {item.text||item}
+                                     checked={this.state.selectedValue == (item.value||item)}
+                                     onSelectedValueChanged = {this.onSelectedValueChanged}/>);
+                    }.bind(this));
+                },
+                getInitialState: function(){
+                    return {selectedValue: this.props.selectedValue};
+                },
+                onSelectedValueChanged: function(event){
+                    this.setState({selectedValue: event.target.value});
+                }
+            });
+           // ReactDOM.render(<label for="province">Province:<RadioButtonList name="province" listItems={["Jiangsu","Zhejiang","Shanghai"]} selectedValue="Shanghai" /></label>, document.getElementById("container1")) ;
+            ReactDOM.render(<label for="gender">Gender:<RadioButtonList name="gender" listItems={[{value:"M", text:"Male"}, {value:"F", text:"Female"}]} selectedValue="F" /></label>, document.getElementById("example10"))
 
 
-    </script>
-  </body>
+
+</script>
+</body>
 </html>
