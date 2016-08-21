@@ -3,17 +3,27 @@
   <head>
     <script src="../build/react.js"></script>
     <script src="../build/react-dom.js"></script>
-    <script src="../build/browser.min.js"></script>
+    <script src="../build/JSXTransformer.js"></script>
   </head>
   <body>
     <div id="example"></div>
     <script type="text/jsx">
 
       var data = 123;
+      var Box=function(){};
+      var box= new Box();
 
       var MyTitle = React.createClass({
         propTypes: {
           title: React.PropTypes.string.isRequired,
+          b:React.PropTypes.instanceOf(Box),
+          content:React.PropTypes.oneOf(['News', 'Photos']),
+          footer: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.number,
+            React.PropTypes.instanceOf(Box)
+          ])
+
         },
 
         render: function() {
@@ -22,7 +32,7 @@
       });
 
       ReactDOM.render(
-        <MyTitle title={data} />,
+        <MyTitle title={data} b={box} content={'News'} footer={123}/>,
         document.getElementById('example')
       );
 

@@ -21,6 +21,9 @@
 <div id="example8"></div>
 <div id="example9"></div>
 <div id="example10"></div>
+<div id="example11"></div>
+<div id="example12"></div>
+<div id="example13"></div>
 <script type="text/jsx;harmony=true">
       //ex1
       /*ReactDOM.render(
@@ -28,7 +31,7 @@
        document.getElementById('example1')
        );*/
 
-      //ex2
+      //ex2 state(getInitialState and this.setState)
       var LikeButton = React.createClass({
         getInitialState: function() {
           return {liked: false};
@@ -51,7 +54,7 @@
               document.getElementById('example2')
       );
 
-      //ex3
+      //ex3 props(this.props)
       /* var Avatar = React.createClass({
        render: function() {
        return (
@@ -86,7 +89,7 @@
        document.getElementById('example3')
        );*/
 
-      //ex4
+      //ex4 map(items.map(function(item){console.log(item)})) key(添加在组件本身上)
       /*var ListItemWrapper = React.createClass({
        render: function() {
        return <li key={this.props.data.id}>{this.props.data.text}</li>;
@@ -127,33 +130,38 @@
               document.getElementById('example4')
       );
 
-      //ex5
+      //ex5 组件html中写入object会报错
+      /*{items['resulta']}
+              {items['resultb']}
+              {items['resultc']}*/
       var Ex5 = React.createClass({
         render: function() {
           var items = {};
+          var itemArr=[];
           this.props.results.forEach(function(result) {
                     // 如果 result.id 看起来是一个数字（比如短哈希），那么
                     // 对象字面量的顺序就得不到保证。这种情况下，需要添加前缀
                     // 来确保 key 是字符串。
-                    items['result' + result.id] = <li>{result.text}</li>;
-        });
-      //return html的内容{}中不支持object对象，会报错
+                    items['result' + result.id] = <li key={result.id}>{result.text}</li>;
+                    itemArr.push(items['result' + result.id]);
+            });
+
+      //return html的内容{}中不支持object对象，会报错 如是items(object)报错，itemArr(array)则没有问题
+      //用数组做渲染变量时，会提示加key，将key直接加到每个数组的值上是可以解决的，不同于一般情况的加在组件上
       return (
               <ol>
-              {items['resulta']}
-              {items['resultb']}
-              {items['resultc']}
+               {itemArr}
               </ol>
               );
       }
-      });  //right way!!!
+      });
       var obj=[{id:'a',text:"text1"},{id:'b',text:"text2"},{id:'c',text:"text3"}];
       ReactDOM.render(
       <Ex5 results={obj} />,
               document.getElementById('example5')
       );
 
-      //ex6
+      //ex6 this.props.children获取组件中的html内容(包含子节点)
       //首字母一定要大写FancyCheckbox
       var Ex6 = React.createClass({
         render: function() {
@@ -166,7 +174,7 @@
       );
       }
       });
-      //this.props.children拿到的render时自定义标签中的内容
+      //this.props.children拿到的render时自定义标签中的内容(表示组件的所有子节点)
       //render时，如果某个this.props中的属性没有赋值也是可以的，如没有赋值onClick也不会报错
       ReactDOM.render(
               <Ex6 checked={true} onClick={console.log.bind(console)}>
@@ -175,13 +183,16 @@
               document.getElementById('example6')
       );
 
-      //ex7
+      //ex7 {...other}包含的内容
       'use strict';
-      var Ex7 = React.createClass({
+      /*var Ex7 = React.createClass({
         render: function() {
           var { checked, ...other } = this.props;
           var fancyClass = checked ? 'FancyChecked' : 'FancyUnchecked';
-          // `other` 包含 { onClick: console.log } 但 checked 属性除外
+          // `other` 包含 { children:'Hello world!',onClick: console.log } 但 checked 属性除外
+          //console.log({...other}) //输出上面的对象内容，说明{...other}是个对象
+          //console.log(other) //同上
+          //console.log(...other) //没有运行输出
           return (
             <div {...other} className={fancyClass} />
           );
@@ -192,7 +203,7 @@
           Hello world!
         </Ex7>,
          document.getElementById('example7')
-      );
+      );*/
       //console.log.bind(console)
       /*可以用来重新定义console.log，如var log = console.log.bind(console); log(123);就等同console.log(123);
         但在这里就是起到console.log(reactDOM，event)的作用，输出这个事件对象和reactDOM对象(只释义但没有这种写法);
@@ -221,8 +232,8 @@
        }
        */
 
-       //ex8
-       var Ex8 = React.createClass({
+       //ex8  {...other}和受限制组件中defaultValue、defaultChecked的使用
+       /*var Ex8 = React.createClass({
            getInitialState: function() {
               return {isChecked: false};
            },
@@ -242,7 +253,7 @@
             //而ex8中是在createClass时定义的元素绑定的方法，然后进行绑定
 
             //交互组件input、option的value、checked、selected属性一旦设置会变成受限制组件（会影响用户改变该值），需要使用onchange事件才能响应用户的内容来改变
-            //如果这些属性没有设置组件就是不受限制组件，跟原生dom的使用是一样的
+            //如果这些属性没有设置，组件就是不受限制组件，跟原生dom的使用是一样的
             //也可以使用defaultValue 属性（类型为 radio、checkbox 的<input> 支持 defaultChecked 属性， <select> 支持 defaultValue 属性）来设置默认值，不会阻止用户改变该值
             return (
             <div>
@@ -263,9 +274,9 @@
        ReactDOM.render(
         <Ex8 type={'radio'} title={'bear'}  />,
          document.getElementById('example8')
-      );
+      );*/
 
-      //ex9
+      //ex9 利用事件对象获取DOM
       var Ex9 = React.createClass({
           handleChange:function(event){
             //event一定要传，不然获取的reactDOM对象
@@ -300,8 +311,10 @@
          document.getElementById('example9')
       );
 
-      //ex10
+      //ex10  一组radio组件实例
        var RadioButton = React.createClass({
+            //createClass时不用添加key，render时在组件本身上添加即可
+            //原生的for要写成htmlFor
             render: function(){
                 return (
                     <label htmlFor={this.props.id}>
@@ -331,11 +344,13 @@
                     );
                 },
                 renderRadionButtons: function(){
+                    //务必把 key 添加到子级数组里组件本身上，而不是每个子级内部最外层
                     return this.props.listItems.map(function(item, index){
                         return (<RadioButton id={this.props.name + "_" + index}
                                      name={this.props.name}
                                      value={item.value||item}
                                      text = {item.text||item}
+                                     key={item.value||item}
                                      checked={this.state.selectedValue == (item.value||item)}
                                      onSelectedValueChanged = {this.onSelectedValueChanged}/>);
                     }.bind(this));
@@ -347,8 +362,124 @@
                     this.setState({selectedValue: event.target.value});
                 }
             });
-           // ReactDOM.render(<label for="province">Province:<RadioButtonList name="province" listItems={["Jiangsu","Zhejiang","Shanghai"]} selectedValue="Shanghai" /></label>, document.getElementById("container1")) ;
-            ReactDOM.render(<label for="gender">Gender:<RadioButtonList name="gender" listItems={[{value:"M", text:"Male"}, {value:"F", text:"Female"}]} selectedValue="F" /></label>, document.getElementById("example10"))
+            ReactDOM.render(<label for="province">Province:<RadioButtonList name="province" listItems={["Jiangsu","Zhejiang","Shanghai"]} selectedValue="Shanghai" /></label>, document.getElementById("example10")) ;
+            //ReactDOM.render(<label for="gender">Gender:<RadioButtonList name="gender" listItems={[{value:"M", text:"Male"}, {value:"F", text:"Female"}]} selectedValue="F" /></label>, document.getElementById("example10"))
+
+       //ex11  获取真实的DOM节点(React.findDOMNode)
+       var MyComponent = React.createClass({
+          handleClick: function() {
+            //React提供了React.findDOMNode(this.refs.ref-name)函数，你可以调用这个函数来获取该组件的DOM结点。
+            ReactDOM.findDOMNode(this.refs.myTextInput).focus();
+          },
+          render: function() {
+            //ref提供一个索引，让this.refs可以当整个组件mounted(嵌入)时找到对应的元素DOM
+            //不能在render中调用React.findDOMNode，因为组件还没有渲染成真正的DOM被浏览器解析，所以不能检索到该元素
+            return (
+              <div>
+                <input type="text" ref="myTextInput" />
+                <input
+                  type="button"
+                  value="Focus the text input"
+                  onClick={this.handleClick}
+                />
+              </div>
+            );
+          }
+        });
+
+        ReactDOM.render(
+          <MyComponent />,
+          document.getElementById('example11')
+        );
+
+        //ex12 propTypes设置prop的类型，如不符合则报错提示
+            //详见http://reactjs.cn/react/docs/reusable-components.html
+         var data = 123;
+          var Box=function(){};
+          var box= new Box();
+
+          var MyTitle = React.createClass({
+            propTypes: {
+              title: React.PropTypes.string.isRequired,
+              b:React.PropTypes.instanceOf(Box),
+              content:React.PropTypes.oneOf(['News', 'Photos']),
+              footer: React.PropTypes.oneOfType([
+                React.PropTypes.string,
+                React.PropTypes.number,
+                React.PropTypes.instanceOf(Box)
+              ])
+
+            },
+
+            render: function() {
+              return <h1> {this.props.title} </h1>;
+            }
+          });
+
+          ReactDOM.render(
+            <MyTitle title={data} b={box} content={'News'} footer={123}/>,
+            document.getElementById('example12')
+          );
+
+        //ex13 Mixins的使用(为了将同样的功能添加到多个组件当中，你需要将这些通用的功能包装成一个mixin，然后导入到你的模块中)
+        /*
+        1.组件可以以数组的形式添加多个mixins，不同mixins之间可以嵌套
+        2.不同mixins的props、state属性和自定义方法不能重复命名
+        3.多个mixins中都可以包含生命周期方法，数组中的从左往右的顺序调用,嵌套组件按嵌入的先后顺序调用
+        */
+        /*var DefaultNameMixin = {
+            getDefaultProps: function () {
+                return {name: "Skippy"};
+            }
+        };
+        var DefaultNameMixin2 = {
+            getDefaultProps: function () {
+                return {fruit: "apple"};
+            }
+        };
+        var ComponentOne = React.createClass({
+            mixins: [DefaultNameMixin,DefaultNameMixin2],
+            render: function() {
+                 return <h2>Hello {this.props.name},give you {this.props.fruit}</h2>;
+            }
+        });*/
+
+        var DefaultNameMixin = {
+            getDefaultProps: function () {
+                return {name: "Skippy"};
+            },
+            componentDidMount: function () {
+                console.log("a");
+            }
+        };
+        var DefaultNameMixin2 = {
+             mixins: [DefaultNameMixin],
+            getDefaultProps: function () {
+                return {fruit: "apple"};
+            },
+            componentDidMount: function () {
+                console.log("b");
+            }
+        };
+        var ComponentOne = React.createClass({
+            mixins: [DefaultNameMixin2],
+            getInitialState: function(){
+                    return {bool: false};
+                },
+            render: function() {
+                 return <h2 ref='h2'>Hello {this.props.name},give you {this.props.fruit}</h2>;
+            },
+            componentWillMount:function(){
+                //该方法在首次渲染之前调用，也是再 render 方法调用之前修改state的最后一次机会。
+                console.log(this.state.bool);
+            },
+            componentDidMount: function () {
+                console.log("c");
+                console.log(ReactDOM.findDOMNode(this.refs.h2));
+            }
+        });
+
+        ReactDOM.render(<ComponentOne />,  document.getElementById('example13'));
 
 
 

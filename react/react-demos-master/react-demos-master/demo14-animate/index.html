@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/react-with-addons.min.js"></script>
+    <script src="../build/JSXTransformer.js"></script>
+    <style type="text/css">
+      .example-enter {
+        color:black;
+        transition: color 3s ease-in;
+      }
+
+      .example-enter.example-enter-active {
+        color:red;
+      }
+
+      .example-leave {
+        color:plum;
+        transition: color 1s ease-in;
+      }
+
+      .example-leave.example-leave-active {
+        color: powderblue;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <div id="example1"></div>
+    <script type="text/jsx">
+      var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
+      var TodoList = React.createClass({
+        getInitialState: function() {
+          return {items: ['hello', 'world', 'click', 'me']};
+        },
+        handleAdd: function() {
+          var newItems =
+                  this.state.items.concat([prompt('Enter some text')]);
+          this.setState({items: newItems});
+        },
+        handleRemove: function(i) {
+          var newItems = this.state.items;
+          newItems.splice(i, 1);
+          this.setState({items: newItems});
+        },
+        render: function() {
+          var items = this.state.items.map(function(item, i) {
+            return (
+                    <div key={item} onClick={this.handleRemove.bind(this, i)}>
+                      {item}
+                    </div>
+            );
+          }.bind(this));
+          return (
+                  <div>
+                    <button onClick={this.handleAdd}>Add Item</button>
+                    <ReactCSSTransitionGroup transitionName="example">
+                      {items}
+                    </ReactCSSTransitionGroup>
+                  </div>
+          );
+        }
+      });
+
+      React.render(<TodoList />,  document.getElementById('example1'));
+
+    </script>
+  </body>
+</html>
