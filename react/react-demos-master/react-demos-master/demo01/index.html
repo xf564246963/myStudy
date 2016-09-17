@@ -98,11 +98,11 @@
        var MyComponent = React.createClass({
        render: function() {
        return (
-       <ul>
-       {this.props.results.map(function(result) {
-       return <ListItemWrapper data={result}/>;
-       })}
-       </ul>
+           <ul>
+               {this.props.results.map(function(result) {
+               return <ListItemWrapper data={result}/>;
+               })}
+           </ul>
        );
        }
        });*/ //wrong way!!! 会报错
@@ -114,6 +114,15 @@
 
       var MyComponent = React.createClass({
         render: function() {
+            //map和forEach的区别：map将每次的return内容都存入数组，而forEach则没有返回
+            /*var arr1 = this.props.results.map(function(result) {
+                    return result;
+                    });  //将result存入到arr1中
+            var arr2 = this.props.results.forEach(function(result) {
+                    return result;
+                    }); //没有将值存入到arr2中
+            console.dir(arr1);  //array[3]
+            console.log(arr2);  //undefined   */
           //务必把 key 添加到子级组件本身上，而不是每个子级内部最外层HTML上
           return (
                   <ul>
@@ -126,8 +135,8 @@
       });  //right way!!!
       var obj=[{id:1,text:"text1"},{id:2,text:"text2"},{id:3,text:"text3"}];
       ReactDOM.render(
-      <MyComponent results={obj} />,
-              document.getElementById('example4')
+           <MyComponent results={obj} />,
+           document.getElementById('example4')
       );
 
       //ex5 组件html中写入object会报错
@@ -365,11 +374,20 @@
             ReactDOM.render(<label for="province">Province:<RadioButtonList name="province" listItems={["Jiangsu","Zhejiang","Shanghai"]} selectedValue="Shanghai" /></label>, document.getElementById("example10")) ;
             //ReactDOM.render(<label for="gender">Gender:<RadioButtonList name="gender" listItems={[{value:"M", text:"Male"}, {value:"F", text:"Female"}]} selectedValue="F" /></label>, document.getElementById("example10"))
 
-       //ex11  获取真实的DOM节点(React.findDOMNode)
+       //ex11  获取真实的DOM节点(React.findDOMNode 和 this.refs)
+       //ref添加到Component上获取的是Component实例，添加到原生HTML上获取的是DOM节点
+       //React.findDOMNode(this.refs.ref-name)当参数是DOM，返回值就是该DOM(这个没啥卵用);当参数是Component获取的是该Component render方法中的DOM
        var MyComponent = React.createClass({
           handleClick: function() {
             //React提供了React.findDOMNode(this.refs.ref-name)函数，你可以调用这个函数来获取该组件的DOM结点。
             ReactDOM.findDOMNode(this.refs.myTextInput).focus();
+
+            //ref添加到Component上获取的是Component实例，添加到原生HTML上获取的是DOM
+            console.log(this.refs.myChild);  //Component实例  Constructor {props: Object, context: Object, refs: Object, updater: Object, state: null…}
+                  //Component实例可以获取React.createClass时里面对象的所有属性(包括props、refs、state等)
+            console.log(this.refs.myTextInput);  //DOM节点 <input type="text">
+            console.log(ReactDOM.findDOMNode(this.refs.myChild));  //DOM节点 <div>the test of the ref in the component</div>
+            console.log(ReactDOM.findDOMNode(this.refs.myTextInput));  //DOM节点 <input type="text">
           },
           render: function() {
             //ref提供一个索引，让this.refs可以当整个组件mounted(嵌入)时找到对应的元素DOM
@@ -382,19 +400,30 @@
                   value="Focus the text input"
                   onClick={this.handleClick}
                 />
+                <ComponentChild ref="myChild"/>
+              </div>
+            );
+          }
+        });
+
+       var ComponentChild = React.createClass({
+          render: function() {
+            return (
+              <div>
+               the test of the ref in the component
               </div>
             );
           }
         });
 
         ReactDOM.render(
-          <MyComponent />,
+          <MyComponent/>,
           document.getElementById('example11')
         );
 
         //ex12 propTypes设置prop的类型，如不符合则报错提示
             //详见http://reactjs.cn/react/docs/reusable-components.html
-         var data = 123;
+          var data = 123;
           var Box=function(){};
           var box= new Box();
 
