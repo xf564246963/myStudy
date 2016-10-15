@@ -24,7 +24,8 @@
 <div id="example11"></div>
 <div id="example12"></div>
 <div id="example13"></div>
-<script type="text/jsx;harmony=true">
+<div id="example14"></div>
+<script type="text/jsx">
       //ex1
       /*ReactDOM.render(
        <h1>Hello,&nbsp;&middot; world!</h1>,
@@ -510,6 +511,22 @@
 
         ReactDOM.render(<ComponentOne />,  document.getElementById('example13'));
 
+        //ex14 ReactDOM.render的第三个参数
+
+          var ThirdParam = React.createClass({
+
+            render: function() {
+              return <h1> ReactDOM.render third param </h1>;
+            }
+          });
+
+          ReactDOM.render(
+            <ThirdParam />,
+            document.getElementById('example14'),
+            function(x){
+                console.log(x);
+            }
+          );
 
 
 </script>

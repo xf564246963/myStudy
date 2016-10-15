@@ -14,13 +14,28 @@ var myApp=angular.module('myApp', [
     .config(function($httpProvider,$stateProvider){
        $httpProvider.defaults.headers.post['Content-Type'] = 'multipart/form-data;boundary=ABCD';
         //$httpProvider.defaults.headers.post['Content-Type'] ="application/x-www-form-urlencoded";
-            $httpProvider.interceptors.push('myInterceptor');
+           // $httpProvider.interceptors.push('myInterceptor');  //使用$httpProvider在.config()函数中注册拦截器
+        $httpProvider.interceptors.push('requestRejector');
+        // Removing 'requestRecoverer' will result to failed request
+        $httpProvider.interceptors.push('requestRecoverer');
+
 
         $stateProvider
             .state('index', {
                 url: '/123',
-                template:"<div><div style='background-color:red;height:100px;width:100px;'></div></div>",
-                controller:function($scope,$stateParams){
+                template:"<div><div style='background-color:red;height:100px;width:100px;'></div><input ng-model='name'></div>",
+                controller:function($scope,$stateParams,$q,$http){
+                    $scope.name="张三";
+                    var defer1 = $q.defer();
+                    var defer2 = $q.defer();
+                    console.log(defer1 == defer2);  //false
+                    console.log(defer1 === defer2);  //false 说明每次实例化的defer都不一样
+
+                    $http.get('https://api.github.com/users/naorye/repos').then(function() {
+                        console.log('success');
+                    }, function(rejectReason) {
+                        console.log('failure');
+                    });
 
                 }
 
@@ -59,6 +74,44 @@ var myApp=angular.module('myApp', [
         }
         return interceptor;
     })
+    .factory('requestRejector', ['$q', function($q) {
+        var requestRejector = {
+            request: function(config) {
+                console.log(config);  //获取每次$http的config内容
+                return $q.reject('requestRejector');   //通过返回一个reject来阻止下一步（人为制造错误）
+                /*下面代码就等于 return $q.reject('requestRejector');*/
+                /*var defer = $q.defer();
+                var promise = defer.promise;
+                defer.reject('requestRejector');
+                return promise;*/
+            }
+        };
+        return requestRejector;
+    }])
+    .factory('requestRecoverer', ['$q', function($q) {
+        var requestRecoverer = {
+            requestError: function(rejectReason) {
+                console.log(rejectReason);//'requestRejector'
+                        // 获得上一个拦截器的请求的返回，因为人为中断，所以在requestError中获取到'requestRejector'
+                if (rejectReason === 'requestRejector') {
+                    // Recover the request 重新发送请求 第一次请求被人为中断，实际上只发了一次请求（就是这一次）
+                    //而本次请求没有经过拦截器，所以一定成功，最后输出success （at line.34  index的router中）
+                    return {
+                        transformRequest: [],
+                        transformResponse: [],
+                        method: 'GET',
+                        url: 'https://api.github.com/users/naorye/repos',
+                        headers: {
+                            Accept: 'application/json, text/plain, */*'
+                        }
+                    };
+                } else {
+                    return $q.reject(rejectReason);
+                }
+            }
+        };
+        return requestRecoverer;
+    }])
     .controller('parent',function($scope,AUTH_EVENTS){
         /*$scope.parent=function(){
             $scope.$broadcast({

@@ -3,32 +3,79 @@
   <head>
     <script src="../build/react.js"></script>
     <script src="../build/react-dom.js"></script>
-    <script src="../build/browser.min.js"></script>
+    <script src="../build/JSXTransformer.js"></script>
   </head>
   <body>
     <div id="example"></div>
+    <div id="example2"></div>
     <script type="text/jsx">
-var LikeButton = React.createClass({
-  getInitialState: function() {
-    return {liked: false};
-  },
-  handleClick: function(event) {
-    this.setState({liked: !this.state.liked});
-  },
-  render: function() {
-    var text = this.state.liked ? 'like' : 'haven\'t liked';
-    return (
-      <p onClick={this.handleClick}>
-        You {text} this. Click to toggle.
-      </p>
-    );
-  }
-});
+    var LikeButton = React.createClass({
+      getInitialState: function() {
+        return {liked: false};
+      },
+      handleClick: function(event) {
+        this.setState({liked: !this.state.liked});
+      },
+      render: function() {
+        var text = this.state.liked ? 'like' : 'haven\'t liked';
+        return (
+          <p onClick={this.handleClick}>
+            You {text} this. Click to toggle.
+          </p>
+        );
+      }
+    });
 
-ReactDOM.render(
-  <LikeButton />,
-  document.getElementById('example')
-);
+    ReactDOM.render(
+      <LikeButton />,
+      document.getElementById('example')
+    );
+
+    var TestButton = React.createClass({
+      getInitialState:function(){
+        return {num:1};
+      },
+      thisClick:function(){
+        this.setState({num:(this.state.num++)})
+        console.log(this.state.num);
+        console.log(this.props.children);
+      },
+      render:function(){
+        var num = this.state.num;
+        return(
+            <p onClick={this.thisClick}>
+               child: {num}
+              <TestButtonParent>qwe</TestButtonParent>
+            </p>
+
+        )
+
+      }
+    })
+
+    var TestButtonParent = React.createClass({
+      thisClick:function(){
+        //console.log(this.state.num);
+        console.log(typeof this.props.children);
+      },
+      render:function(){
+       // var num = this.state.num;
+        return (
+             <p onClick={this.thisClick}>
+                parent:
+             </p>
+        )
+      }
+    })
+
+    ReactDOM.render(
+        <TestButton>
+          <span>hello</span>
+          <span>world</span>
+        </TestButton>,
+        document.getElementById('example2')
+    );
+
     </script>
   </body>
 </html>
